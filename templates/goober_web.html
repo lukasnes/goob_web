@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+  <title>Goober Web</title>
+  <link rel="stylesheet" href='../static/css/reset.css'>
+  <link rel="stylesheet" href='../static/css/styles.css'>
+</head>
+<body>
+  <header class="header">
+    <button class="sidebar-btn"></button>
+    <p class="title">Goober Web</p>
+    {% if 'username' not in session %}
+      <a href="/login" class='session-btn'>Login</a>
+    {% endif %}
+    {% if 'username' in session %}
+      <a href="/logout" class='session-btn'>Logout</a>
+    {% endif %}
+  </header>
+
+  <h1 class="sidebar">
+    <ul class = 'sidebar-content'>
+      <li>
+        <a href='/home' class = 'home'>
+          <img src="../static/img/sidebar/home.png">
+          <p class="sidebar-text">Home</p>
+        </a>
+      </li>
+      <ul class='level-list'>
+        <li>
+          <a href='/lvl1' class = 'lvl1'>
+            <img src="../static/img/sidebar/lizardman_stand.png" class='lvl-img'>
+            <p class="sidebar-text">Level 1</p>
+          </a>
+        </li>
+        <li>
+          <a href='' class = 'lvl2'>
+            <img src='../static/img/sidebar/turtle_stand.png'
+            class='lvl-img'>
+            <p class='sidebar-text'>Level 2</p>
+          </a>
+        </li>
+        <li>
+          <a href='' class = 'lvl3'>
+            <img src='../static/img/sidebar/lion_stand.png' class='lvl-img'>
+            <p class='sidebar-text'>Level 3</p>
+          </a>
+        </li>
+        <li>
+          <a href='' class = 'lvl4'>
+            <img src="../static/img/sidebar/monk_stand.png" class='lvl-img'>
+            <p class='sidebar-text'>Level 4</p>
+          </a>
+        </li>
+        <li>
+          <a href='' class = 'lvl5'>
+            <img src="../static/img/sidebar/monke_stand.png" class='lvl-img'>
+            <p class='sidebar-text'>Level 5</p>
+          </a>
+        </li>
+        <li>
+          <a href='' class = 'lvl6'>
+            <img src="../static/img/sidebar/flower_stand.png" class='lvl-img'>
+            <p class='sidebar-text'>Level 6</p>
+          </a>
+        </li>
+        <li>
+          <a href='' class = 'lvl7'>
+            <img src="../static/img/sidebar/cyclops_stand.png" class='lvl-img'>
+            <p class='sidebar-text'>Level 7</p>
+          </a>
+        </li>
+        <li>
+          <a href='' class = 'lvl8'>
+            <img src="../static/img/sidebar/crabman_stand.png" class='lvl-img'>
+            <p class='sidebar-text'>Level 8</p>
+          </a>
+        </li>
+      </ul>
+      <li>
+        <a href='' class = 'dwnld'>
+          <img src= '../static/img/sidebar/download/download_btn1.png' class='dwn-img'>
+          <p class='sidebar-text'>Download</p>
+        </a>
+      </li>
+    </ul>
+  </h1>
+
+<h2 class="page-content">
+{% block content %}
+{% endblock %}
+</h2>
+
+{% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+        <div class="alert">{{ message }}</div>
+    {% endfor %}
+{% endwith %}
+
+<script src="../static/js/support.js"></script>
+</body>
+</html>
