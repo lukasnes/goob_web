@@ -493,5 +493,73 @@ body{
     align-items: center;
     text-align: center;
     flex: .5;
+    background-color: #104f55;
+    color: #59f8e8;
+    font-family: pixelfont;
+    border-radius: 20%;
+    animation-name: goober_best;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+.best-time{
+    list-style: none;
+    counter-reset: goob-counter;
+    background-color: #2e1f27;
+    font-size: 1.25rem;
+    border: .5rem solid;
+    border-radius: 5%;
+    animation-name: flashy-goober;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+.best-time li {
+    counter-increment: goob-counter;
+}
+.best-time li::before{
+    content: counter(goob-counter) ".";
+    color: #f7ebe8;
+}
+.best-time-plus-egg{
+    background-color: #2e1f27;
+    border: .5rem solid;
+    border-radius: 5%;
+    counter-reset: goob-egg-counter;
+    animation-name: flashy-goober;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+.best-time-plus-egg li {
+    counter-increment: goob-egg-counter;
+}
+.best-time-plus-egg li::before{
+    content: counter(goob-egg-counter) ".";
+    color: #f7ebe8;
+}
+.best-time-plus-breakfast{
+    background-color: #2e1f27;
+    border: .5rem solid;
+    border-radius: 5%;
+    counter-reset: goob-breakfast-counter;
+    animation-name: flashy-goober;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+.best-time-plus-breakfast li {
+    counter-increment: goob-breakfast-counter;
+}
+.best-time-plus-breakfast li::before{
+    content: counter(goob-breakfast-counter) ".";
+    color: #f7ebe8;
+}
+.leaderboard-title{
+    font-size: 3rem;
+}
+.record-title{
+    font-size: 2rem;
+}
+.ranking-data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 

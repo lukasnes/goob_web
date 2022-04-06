@@ -150,69 +150,68 @@ def lvl_page(id):
     'best_time_plus_breakfast': {}}
   
     time_query = LVL.query.filter_by(lvl_id=id).order_by(asc(LVL.lvl_time))
-    best_time_count = 0
-    while best_time_count < 9:
-        for lvl_data in time_query:
-            user_query = User.query.filter_by(user_id=lvl_data.user_id).first()
-            
-            if lvl_data.user_id in data['best_time']:
-                if deconstruct_time(data['best_time'][lvl_data.user_id]['lvl_time']) > lvl_data.lvl_time:
-                    data['best_time'][lvl_data.user_id]['lvl_time'] = create_time(lvl_data.lvl_time)
-                    data['best_time'][lvl_data.user_id]['nickname'] = user_query.full_name
-                    data['best_time'][lvl_data.user_id]['state'] = user_query.state
-            else:
-                data['best_time'][lvl_data.user_id] = {}
-                data['best_time'][lvl_data.user_id]['lvl_time'] = create_time(lvl_data.lvl_time)
-                data['best_time'][lvl_data.user_id]['nickname'] = user_query.full_name
-                data['best_time'][lvl_data.user_id]['state'] = user_query.state
+    best_time = data['best_time']    
+    for lvl_data in time_query:
+        user_query = User.query.filter_by(user_id=lvl_data.user_id).first()
+        if len(best_time.keys()) == 10:
+            break
+        if lvl_data.user_id in best_time:
+            user_info = best_time[lvl_data.user_id]
+            if deconstruct_time(user_info['lvl_time']) > lvl_data.lvl_time:
+                user_info['lvl_time'] = create_time(lvl_data.lvl_time)
+                user_info['nickname'] = user_query.full_name
+                user_info['state'] = user_query.state
+        else:
+            best_time[lvl_data.user_id] = {}
+            user_info = best_time[lvl_data.user_id]
+            user_info['lvl_time'] = create_time(lvl_data.lvl_time)
+            user_info['nickname'] = user_query.full_name
+            user_info['state'] = user_query.state
 
-            best_time_count += 1
     
-    best_time_plus_egg_count = 0
     egg_query = LVL.query.filter_by(lvl_id=id).filter_by(lvl_void_egg=True).order_by(asc(LVL.lvl_time))
-    while best_time_plus_egg_count < 9:
-        if lvl_data in egg_query:
-            for lvl_data in egg_query:
-                user_query = User.query.filter_by(user_id=lvl_data.user_id).first()
+    egg_time = data['best_time_plus_egg']
+    for lvl_data in egg_query:
+        if len(egg_time.keys()) == 3:
+            break
+        user_query = User.query.filter_by(user_id=lvl_data.user_id).first()
                 
-                if lvl_data.user_id in data['best_time_plus_egg']:
-                    if deconstruct_time(data['best_time_plus_egg'][lvl_data.user_id]['lvl_time']) > lvl_data.lvl_time:
-                        data['best_time_plus_egg'][lvl_data.user_id]['lvl_time'] = create_time(lvl_data.lvl_time)
-                        data['best_time_plus_egg'][lvl_data.user_id]['nickname'] = user_query.full_name
-                        data['best_time_plus_egg'][lvl_data.user_id]['state'] = user_query.state
-                else:
-                    data['best_time_plus_egg'][lvl_data.user_id] = {}
-                    data['best_time_plus_egg'][lvl_data.user_id]['lvl_time'] = create_time(lvl_data.lvl_time)
-                    data['best_time_plus_egg'][lvl_data.user_id]['nickname'] = user_query.full_name
-                    data['best_time_plus_egg'][lvl_data.user_id]['state'] = user_query.state
-                
-                best_time_plus_egg_count += 1
+        if lvl_data.user_id in egg_time:
+            user_info = egg_time[lvl_data.user_id]
+            if deconstruct_time(user_info['lvl_time']) > lvl_data.lvl_time:
+                user_info['lvl_time'] = create_time(lvl_data.lvl_time)
+                user_info['nickname'] = user_query.full_name
+                user_info['state'] = user_query.state
         else:
-            best_time_plus_egg_count += 1
-            
-    best_time_plus_breakfast_count = 0
-    breakfast_query = LVL.query.filter_by(lvl_id=id).filter_by(lvl_void_egg=True).filter_by(lvl_bacon=total_bacon[id]).order_by(asc(LVL.lvl_time))
-    print(breakfast_query)
-    while best_time_plus_breakfast_count < 9:
-        if lvl_data in breakfast_query:
-            for lvl_data in breakfast_query:
-                user_query = User.query.filter_by(user_id=lvl_data.user_id).first()
+            egg_time[lvl_data.user_id] = {}
+            user_info = egg_time[lvl_data.user_id]
+            user_info['lvl_time'] = create_time(lvl_data.lvl_time)
+            user_info['nickname'] = user_query.full_name
+            user_info['state'] = user_query.state
+
                 
-                if lvl_data.user_id in data['best_time_plus_breakfast']:
-                    if deconstruct_time(data['best_time_plus_breakfast'][lvl_data.user_id]['lvl_time']) > lvl_data.lvl_time:
-                        data['best_time_plus_breakfast'][lvl_data.user_id]['lvl_time'] = create_time(lvl_data.lvl_time)
-                        data['best_time_plus_breakfast'][lvl_data.user_id]['nickname'] = user_query.full_name
-                        data['best_time_plus_breakfast'][lvl_data.user_id]['state'] = user_query.state
-                else:
-                    data['best_time_plus_breakfast'][lvl_data.user_id] = {}
-                    data['best_time_plus_breakfast'][lvl_data.user_id]['lvl_time'] = create_time(lvl_data.lvl_time)
-                    data['best_time_plus_breakfast'][lvl_data.user_id]['nickname'] = user_query.full_name
-                    data['best_time_plus_breakfast'][lvl_data.user_id]['state'] = user_query.state
-                    
-                best_time_plus_breakfast_count += 1
+    max_bacon = total_bacon[id]
+    breakfast_query = LVL.query.filter_by(lvl_id=id).filter_by(lvl_void_egg=True).filter_by(lvl_bacon=max_bacon).order_by(asc(LVL.lvl_time))
+    breakfast_time = data['best_time_plus_breakfast']
+
+    for lvl_data in breakfast_query:
+        if len(breakfast_time.keys()) == 3:
+            break
+        user_query = User.query.filter_by(user_id=lvl_data.user_id).first()
+                
+        if lvl_data.user_id in breakfast_time:
+            user_info = breakfast_time[lvl_data.user_id]                    
+            if deconstruct_time(user_info['lvl_time']) > lvl_data.lvl_time:
+                user_info['lvl_time'] = create_time(lvl_data.lvl_time)
+                user_info['nickname'] = user_query.full_name
+                user_info['state'] = user_query.state
         else:
-            best_time_plus_breakfast_count += 1
-    print(data)
+            breakfast_time[lvl_data.user_id] = {}
+            user_info = breakfast_time[lvl_data.user_id]
+            user_info['lvl_time'] = create_time(lvl_data.lvl_time)
+            user_info['nickname'] = user_query.full_name
+            user_info['state'] = user_query.state
+
     
     return render_template('lvl_stats.html',
                            user_data=user_data,
@@ -259,7 +258,7 @@ def goober_data():
     
     return "That username or password did not exist."
 
-if __name__ == "__main__":
+def app():
     # We have to set debug=True here, since it has to be True at the
     # point that we invoke the DebugToolbarExtension
     app.debug = True
@@ -270,3 +269,6 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     app.run(port=5000, host='0.0.0.0')
+
+if __name__ == "__main__":
+    app()

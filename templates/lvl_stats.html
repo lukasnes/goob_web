@@ -27,27 +27,36 @@
 </div>
 
 <div class='record-boxes'>
-    <div class='best-time-no-collectibles'>
+    <p class='leaderboard-title'>Any % Leaderboard</p>
+    <div class='best-time'>
         <p class='record-title'>No Time for Breakfast in {{ user_data['lvl_name'] }}</p> 
         <ul class='best_time_list'>
             {% for key in data['best_time'] %}
-                <li>{{ data['best_time'][key]['lvl_time'] }} {{ data['best_time'][key]['nickname'] }} {{ data['best_time'][key]['state'] }}</li>
+                <li class="ranking_data">
+                    {{ data['best_time'][key]['nickname'] }} &emsp;&emsp;&emsp; {{ data['best_time'][key]['lvl_time'] }} &emsp;&emsp;&emsp; {{ data['best_time'][key]['state'] }}
+                </li>
             {% endfor %}
         </ul>
     </div>
+    <p class='leaderboard-title'>Egg % Leaderboard</p>
     <div class='best-time-plus-egg'>
         <p class='record-title'>Quick Runny Egg in {{ user_data['lvl_name'] }}</p>
         <ul class='best_time_list'>
             {% for key in data['best_time_plus_egg'] %}
-                <li>{{ data['best_time_plus_egg'][key]['lvl_time'] }} {{ data['best_time_plus_egg'][key]['nickname'] }} {{ data['best_time_plus_egg'][key]['state'] }}</li>
+                <li class="ranking_data">
+                    {{ data['best_time_plus_egg'][key]['nickname'] }} &emsp;&emsp;&emsp; {{ data['best_time_plus_egg'][key]['lvl_time'] }} &emsp;&emsp;&emsp; {{ data['best_time_plus_egg'][key]['state'] }}
+                </li>
             {% endfor %}
         </ul>
     </div>
+    <p class='leaderboard-title'>100% Leaderboard</p>
     <div class='best-time-plus-breakfast'>
         <p class='record-title'>Full Breakfast in {{ user_data['lvl_name'] }}</p>
         <ul class='best_time_list'>
             {% for key in data['best_time_plus_breakfast'] %}
-                <li>{{ data['best_time_plus_breakfast'][key]['lvl_time'] }} {{ data['best_time_plus_breakfast'][key]['nickname'] }} {{ data['best_time_plus_breakfast'][key]['state'] }}</li>
+                <li class="ranking_data">
+                    {{ data['best_time_plus_breakfast'][key]['nickname'] }} &emsp;&emsp;&emsp; {{ data['best_time_plus_breakfast'][key]['lvl_time'] }} &emsp;&emsp;&emsp; {{ data['best_time_plus_breakfast'][key]['state'] }}
+                </li>
             {% endfor %}
         </ul>
     </div>
