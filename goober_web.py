@@ -3,11 +3,13 @@ from flask import Flask, request, render_template, session, flash, redirect, url
 from sqlalchemy import asc, desc
 from goober_database import connect_to_db, db, User, LVL
 from support import create_time, deconstruct_time
+from flask_migrate import Migrate
 import os
 
 app = Flask(__name__)
 
 app.secret_key = os.environ['PASS']
+migrate = Migrate(app, db)
 
 @app.route('/')
 def goober_home():
@@ -258,17 +260,17 @@ def goober_data():
     
     return "That username or password did not exist."
 
-def app():
-    # We have to set debug=True here, since it has to be True at the
-    # point that we invoke the DebugToolbarExtension
-    app.debug = True
-    app.env = "development"
-    # make sure templates, etc. are not cached in debug mode
-    app.jinja_env.auto_reload = app.debug
+# We have to set debug=True here, since it has to be True at the
+# point that we invoke the DebugToolbarExtension
+app.debug = True
+app.env = "development"
+# make sure templates, etc. are not cached in debug mode
+app.jinja_env.auto_reload = app.debug
 
-    connect_to_db(app)
+connect_to_db(app)
+def app_start():
 
     app.run(port=5000, host='0.0.0.0')
 
 if __name__ == "__main__":
-    app()
+    app_start()
