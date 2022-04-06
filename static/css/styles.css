@@ -51,20 +51,20 @@ body{
     0% { background-color: #104f55;
         color:#59f8e8;
         border-radius: 50% 50% 0% 0%;
-        width: 30rem;
-        margin-left: -19rem;
+        width: 35rem;
+        margin-left: -22rem;
         font-size: 2rem;}
     50% { background-color: #6883ba;
         color: #f7ebe8;
         border-radius: 0% 0% 50% 50%;
-        width: 20rem;
-        margin-left: -14rem;
+        width: 25rem;
+        margin-left: -17rem;
         font-size: 1.5rem;}
     100% { background-color: #104f55;
         color: #59f8e8;
         border-radius: 50% 50% 0% 0%;
-        width: 30rem;
-        margin-left: -19rem;
+        width: 35rem;
+        margin-left: -22rem;
         font-size: 2rem;}
 }
 .alert{
@@ -309,6 +309,7 @@ body{
     height: calc(100vh - var(--header-height));
     overflow-y: scroll;
     display: flex;
+    justify-content: space-around;
     right: 0;
     top: calc(var(--header-height) + 1rem);
     transition: width var(--animation-duration) var(--animation-timing-curve);
@@ -363,7 +364,7 @@ body{
     animation-iteration-count: infinite;
 }
 #login-form{
-    margin-top: 30%;
+    margin-top: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -392,7 +393,7 @@ body{
     cursor: pointer;
 }
 #register-form{
-    margin-top: 30%;
+    margin-top: 22%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -420,3 +421,77 @@ body{
     background-image: url('../img/goobers_animate/cyclops_walk1.gif');
     cursor: pointer;
 }
+@keyframes goober_best{
+    0% {border: 2rem solid #2e1f27;}
+    50% {border: 2rem solid #f7ebe8;}
+    100% {border: 2rem solid #2e1f27;}
+}
+.personal-best-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    flex: .3;
+    height: 50%;
+    color: #59f8e8;
+    font-family: pixelfont;
+    font-size: 2rem;
+    border-radius: 20%;
+    background-color: #104f55;
+    animation-name: goober_best;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+@keyframes flashy-goober{
+    0% {border-color: #f7ebe8;}
+    50% {border-color: #6883ba;}
+    100% {border-color: #f7ebe8;}
+}
+.best-title{
+    background-color: #2e1f27;
+    border: .5rem solid #6883ba;
+    border-radius: 10%;
+    animation-name: flashy-goober;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+.personal-time{
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+    background-color: #2e1f27;
+    border: .5rem solid #6883ba;
+    border-radius: 10%;
+    animation-name: flashy-goober;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+.bacon-collected{
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+    background-color: #2e1f27;
+    border: .5rem solid #6883ba;
+    border-radius: 10%;
+    animation-name: flashy-goober;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+.egg-img{
+    background-color: #2e1f27;
+    border: .5rem solid #6883ba;
+    border-radius: 20%;
+    animation-name: flashy-goober;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+.record-boxes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    flex: .5;
+}
+

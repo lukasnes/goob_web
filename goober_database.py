@@ -14,7 +14,27 @@ class User(db.Model):
     state = db.Column(db.String(2), nullable=True)
     
     def __repr__(self):
-        return f"<User username={self.username} full_name={self.full_name} state={self.state}"
+        return f"<User user_id={self.user_id} username={self.username} full_name={self.full_name} state={self.state}>"
+
+class LVL(db.Model):
+    """Super Goober World Goober Data"""
+    
+    __tablename__ = 'lvl'
+    
+    lvl_data_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    lvl_id = db.Column(db.Integer)
+    lvl_name = db.Column(db.String(50))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    lvl_time = db.Column(db.Integer)
+    lvl_bacon = db.Column(db.Integer)
+    lvl_void_egg = db.Column(db.Boolean)
+    
+    user = db.relationship("User",
+                           backref=db.backref("lvl",
+                                              order_by=lvl_id))
+    
+    def __repr__(self):
+        return f"<Data lvl_id={self.lvl_id} user_id={self.user_id} lvl_time={self.lvl_time}>"
     
 def connect_to_db(app):
     """Connect the database to our Flask app."""

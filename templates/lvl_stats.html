@@ -1,0 +1,57 @@
+{% extends "goober_web.html" %}
+
+{% block content %}
+
+<div class='personal-best-box'>
+    {% if user_data['lvl_time'] and user_data['lvl_bacon'] and user_data['nickname'] %}
+    <p class='best-title'>{{ user_data['nickname'] }} in {{ user_data['lvl_name'] }}</p>
+    <div class='personal-time'>
+        <p>Personal Best Time:</p>
+        <p>{{ user_data['lvl_time'] }}</p>
+    </div>
+    <div class='bacon-collected'>
+        <p>Bacon Collected:</p>
+        <p>{{ user_data['lvl_bacon'] }} /  {{ user_data['total_bacon'] }}</p>
+    </div>
+    <div class='egg-collected'>
+        {% if user_data['lvl_void_egg'] %}
+        <img src='../static/img/lvl_data/egg2.png' class='egg-img'>
+        {% endif %}
+        {% if not user_data['lvl_void_egg'] %}
+        <img src='../static/img/lvl_data/egg1.png' class='egg-img'>
+        {% endif %}
+    </div>
+    {% else %}
+    <p>You must be logged in and have sent data to the Goober Web to view personal stats</p>
+    {% endif %}
+</div>
+
+<div class='record-boxes'>
+    <div class='best-time-no-collectibles'>
+        <p class='record-title'>No Time for Breakfast in {{ user_data['lvl_name'] }}</p> 
+        <ul class='best_time_list'>
+            {% for key in data['best_time'] %}
+                <li>{{ data['best_time'][key]['lvl_time'] }} {{ data['best_time'][key]['nickname'] }} {{ data['best_time'][key]['state'] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class='best-time-plus-egg'>
+        <p class='record-title'>Quick Runny Egg in {{ user_data['lvl_name'] }}</p>
+        <ul class='best_time_list'>
+            {% for key in data['best_time_plus_egg'] %}
+                <li>{{ data['best_time_plus_egg'][key]['lvl_time'] }} {{ data['best_time_plus_egg'][key]['nickname'] }} {{ data['best_time_plus_egg'][key]['state'] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class='best-time-plus-breakfast'>
+        <p class='record-title'>Full Breakfast in {{ user_data['lvl_name'] }}</p>
+        <ul class='best_time_list'>
+            {% for key in data['best_time_plus_breakfast'] %}
+                <li>{{ data['best_time_plus_breakfast'][key]['lvl_time'] }} {{ data['best_time_plus_breakfast'][key]['nickname'] }} {{ data['best_time_plus_breakfast'][key]['state'] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+{% endblock %}

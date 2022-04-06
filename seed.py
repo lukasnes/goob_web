@@ -1,5 +1,5 @@
 from sqlalchemy import func
-from goober_database import User, connect_to_db, db
+from goober_database import User, LVL, connect_to_db, db
 from goober_web import app
 
 def load_users():
@@ -18,6 +18,32 @@ def load_users():
                     state=state)
         
         db.session.add(user)
+        
+    db.session.commit()
+    
+def load_lvls():
+    """Load lvls from u.lvl into db"""
+    
+    LVL.query.delete()
+    
+    for row in open('./seed_data/u.lvl'):
+        row = row.rstrip()
+        lvl_id,lvl_name,user_id,lvl_time,lvl_bacon,lvl_void_egg = row.split('|')
+        
+        if int(lvl_void_egg):
+            lvl_void_egg = True
+        else:
+            lvl_void_egg = False
+        
+        lvl = LVL(
+                lvl_id=lvl_id,
+                lvl_name=lvl_name,
+                user_id=user_id,
+                lvl_time=lvl_time,
+                lvl_bacon=lvl_bacon,
+                lvl_void_egg=lvl_void_egg)
+        
+        db.session.add(lvl)
         
     db.session.commit()
     
@@ -41,4 +67,5 @@ if __name__ == "__main__":
 
     # Import different types of data
     load_users()
+    load_lvls()
     set_val_user_id()
