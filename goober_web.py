@@ -33,12 +33,11 @@ def process_login():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
-        byte_pass = password.encode('utf-8')
         query = User.query
         if query.filter_by(username=f"{username}").first():
             curr_user = User.query.filter_by(username=f"{username}").one()
 
-            if bcrypt.checkpw(byte_pass,curr_user.password):
+            if bcrypt.checkpw(password.encode('utf-8'),curr_user.password.encode('utf-8')):
                 session['username'] = username
                 flash("Login successful!")
                 return redirect(url_for('goober_home')) 
@@ -73,7 +72,7 @@ def register():
             hash = bcrypt.hashpw(byte_pass,salt)
             
             new_user = User(username=username,
-                            password=hash,
+                            password=hash.decode('utf-8'),
                             full_name=full_name,
                             state=state)
             

@@ -18,7 +18,7 @@ def load_users():
         
         user = User(user_id=user_id,
                     username=username,
-                    password=hash,
+                    password=hash.decode('utf-8'),
                     full_name=full_name,
                     state=state)
         
