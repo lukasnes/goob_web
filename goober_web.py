@@ -38,7 +38,7 @@ def process_login():
         if query.filter_by(username=f"{username}").first():
             curr_user = User.query.filter_by(username=f"{username}").one()
 
-            if bcrypt.checkpw(byte_pass,curr_user.password.encode('utf-8')):
+            if bcrypt.checkpw(byte_pass,curr_user.password):
                 session['username'] = username
                 flash("Login successful!")
                 return redirect(url_for('goober_home')) 
