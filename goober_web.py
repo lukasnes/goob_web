@@ -5,6 +5,7 @@ from goober_database import connect_to_db, db, User, LVL
 from support import create_time, deconstruct_time
 from flask_migrate import Migrate
 import os
+import bcrypt
 
 app = Flask(__name__)
 
@@ -32,10 +33,11 @@ def process_login():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
+        byte_pass = password.encode('utf-8')
         query = User.query
         if query.filter_by(username=f"{username}").first():
             curr_user = User.query.filter_by(username=f"{username}").one()
-            if password == curr_user.password:
+            if bcrypt.checkpw(byte_pass,curr_user.password):
                 session['username'] = username
                 flash("Login successful!")
                 return redirect(url_for('goober_home')) 
@@ -63,26 +65,28 @@ def register():
         
         query = User.query
         
-        #Check input fields
-        if username and password and full_name and state:
-            #Check if the username exists in the database
-            if not query.filter_by(username=f"{username}").first():
-                new_user = User(username=username,
-                                password=password,
-                                full_name=full_name,
-                                state=state)
-                
-                db.session.add(new_user)
-                db.session.commit()
-                flash("User created successfully, you may now log in.")
-                return render_template('goober_login.html')
-            else:
-                flash("That username is taken.")
-                return render_template('goober_login.html')
+        #Check if the username exists in the database
+        if not query.filter_by(username=f"{username}").first():
+            byte_pass = password.encode('utf-8')
+            salt = bcrypt.gensalt()
+            hash = bcrypt.hashpw(byte_pass,salt)
             
-        else:
-            flash("You must fill out all fields.")
+            new_user = User(username=username,
+                            password=hash,
+                            full_name=full_name,
+                            state=state)
+            
+            db.session.add(new_user)
+            db.session.commit()
+            flash("User created successfully, you may now log in.")
             return render_template('goober_login.html')
+        else:
+            flash("That username is taken.")
+            return render_template('goober_login.html')
+        
+    else:
+        flash("You must fill out all fields.")
+        return render_template('goober_login.html')
         
 total_bacon={
         0:36,

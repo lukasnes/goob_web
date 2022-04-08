@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 db = SQLAlchemy()
 
@@ -9,7 +10,7 @@ class User(db.Model):
     
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     username = db.Column(db.String(64))
-    password = db.Column(db.String(64))
+    password = db.Column(db.String(255))
     full_name = db.Column(db.String(128), nullable=True)
     state = db.Column(db.String(2), nullable=True)
     
@@ -40,7 +41,7 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our PstgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nesit:qqq@localhost/goober_data'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)

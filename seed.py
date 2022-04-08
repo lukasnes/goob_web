@@ -1,6 +1,7 @@
 from sqlalchemy import func
 from goober_database import User, LVL, connect_to_db, db
 from goober_web import app
+import bcrypt
 
 def load_users():
     """Load users from u.user into db"""
@@ -11,9 +12,13 @@ def load_users():
         row = row.rstrip()
         user_id, username, password, full_name, state = row.split('|')
         
+        byte_pwd = password.encode('utf-8')
+        salt = bcrypt.gensalt()
+        hash = bcrypt.hashpw(byte_pwd,salt)
+        
         user = User(user_id=user_id,
                     username=username,
-                    password=password,
+                    password=hash,
                     full_name=full_name,
                     state=state)
         
