@@ -1,4 +1,6 @@
 alembic==1.7.7
+bcrypt==3.2.0
+cffi==1.15.0
 click==8.1.0
 colorama==0.4.4
 Flask==2.1.0
@@ -14,5 +16,7 @@ MarkupSafe==2.1.1
 postgres==4.0
 psycopg2-binary==2.9.3
 psycopg2-pool==1.1
+pycparser==2.21
+six==1.16.0
 SQLAlchemy==1.4.32
 Werkzeug==2.1.0
