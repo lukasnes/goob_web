@@ -562,4 +562,45 @@ body{
     flex-direction: row;
     justify-content: space-between;
 }
-
+.home-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.home-header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 5rem;
+    width: 90%;
+    color: #59f8e8;
+    font-family: pixelfont;
+    font-size: 3rem;
+    background-color: #2e1f27;
+    border: 1rem solid #f7ebe8;
+    border-radius: 10%;
+}
+.article{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.mission{
+    width: 60%;
+    background-color: #2e1f27;
+    border: 1rem solid #f7ebe8;
+    border-radius: 10%;
+}
+.article-title{
+    color: #59f8e8;
+    font-family: pixelfont;
+    font-size: 3rem;
+    text-align: center;
+}
+.article-content{
+    color: #59f8e8;
+    font-family: pixelfont;
+    font-size: 1.5rem;
+    text-align: center;
+}
