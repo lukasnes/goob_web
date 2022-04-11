@@ -610,3 +610,8 @@ body{
     height: 64px;
     width: 100%;
 }
+.home-animations{
+    border: .5rem solid #59f8e8;
+    background-color: #104f55;
+    border-radius: 50%;
+}
