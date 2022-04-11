@@ -565,7 +565,7 @@ body{
 .home-box{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 .home-header{
@@ -603,4 +603,10 @@ body{
     font-family: pixelfont;
     font-size: 1.5rem;
     text-align: center;
+}
+.home-footer{
+    background-image: url('../img/goobers_animate/void1.gif');
+    background-repeat: repeat-x;
+    height: 64px;
+    width: 100%;
 }
