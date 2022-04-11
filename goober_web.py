@@ -246,7 +246,7 @@ def goober_data():
         query = User.query
         if query.filter_by(username=f"{username}").first():
             user = query.filter_by(username=f"{username}").first()
-            if user.password == password:
+            if bcrypt.checkpw(password.encode('utf-8'),user.password.encode('utf-8')):
                 lvl_data = LVL(
                             lvl_id=lvl,
                             lvl_name=lvl_name,
