@@ -615,3 +615,36 @@ body{
     background-color: #104f55;
     border-radius: 50%;
 }
+.download-box{
+    margin-top: 5%;
+    margin-right: 11%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 30rem;
+    width: 30rem;
+    background-color: #2e1f27;
+    border: .5rem solid #104f55;
+    border-radius: 20% 20% 75% 75%;
+}
+.download-text{
+    color: #59f8e8;
+    font-family: pixelfont;
+    font-size: 1.5rem;
+    text-align: center;
+}
+.download-btn{
+    display: flex;
+    width: 7rem;
+    height: 5rem;
+    justify-content: center;
+    align-items: center;
+    border: .5rem solid #f7ebe8;
+    border-radius: 25%;
+    background-color: #104f55;
+}
+.download-btn:hover{
+    cursor: pointer;
+    background-color: #6883ba;
+}

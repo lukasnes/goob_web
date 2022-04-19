@@ -1,5 +1,5 @@
 from distutils.log import debug
-from flask import Flask, request, render_template, session, flash, redirect, url_for
+from flask import Flask, request, render_template, session, flash, redirect, url_for, send_file
 from sqlalchemy import asc, desc
 from goober_database import connect_to_db, db, User, LVL
 from support import create_time, deconstruct_time
@@ -226,6 +226,10 @@ def lvl_page(id):
 @app.route('/download')
 def download_page():
     return render_template('download.html')
+
+@app.route('/send_game')
+def download_game():   
+    return send_file('./download/SuperGooberWorld.zip')
 
 @app.route('/goober_data',methods=["POST"])
 def goober_data():
